@@ -35,28 +35,39 @@ class Node{
 
 class LinkedList{
     Node head;
-
+    //This will insert the node at the end of the list
     public void insert(int data){
+        //create a empty node
         Node node = new Node();
+        //assign the data to the node
         node.data = data;
-
+       //if there are no previous nodes then assign
+       //the value to the head
+       //its the first node
         if(head == null){
             head =node;
         }
+        //otherwise create a node traverse to the end
+        //of the list and insert the node there.
         else{
-            Node n = head;
-            while(n.next!= null){
-                n = n.next;
+            Node current = head;
+            //condition to check the last node
+            while(current.next!= null){
+                //traversing the list
+                current = current.next;
             }
-            n.next = node;
+            //attaching the new node to the end of the list
+            current.next = node;
         }
     }
 
     public void printLinkedList(){
-        Node n = head;
-        while(n!=null){
-            System.out.println(n.data);
-            n = n.next;
+        //traverse the list and print the data of each node
+        Node current = head;
+        //break when the list reaches the last node
+        while(current!=null){
+            System.out.println(current.data);
+            current = current.next;
         }
 
     }
@@ -77,6 +88,7 @@ class LinkedList{
 
     }
     public void insertAtStart(int data){
+        //change the head to the newly created node
         Node node = new Node();
         node.data = data;
         node.next = head;
@@ -87,38 +99,48 @@ class LinkedList{
           
         Node node = new Node();
         node.data = data;
+        //if index is equal to 0 change the head node to new node
         if(index == 0)
         {
            node.next = head;
            head = node;
         }
+        //traverse the list upto the index attach it there
         else{
-            Node n = head;
+            Node current = head;
+            //just stop at the one element before index
             for(int i=0;i<index-1;i++){
-                n= n.next;
+                current= current.next;
             }
-           Node b = n.next;
-           n.next = node;
-           n.next.next = b;
+            //change the links to the elements
+           Node next = current.next;
+           current.next = node;
+           current.next.next = next;
 
         }
 
     }
 
     public void deleteAt(int index){
-        Node n = head;
+        Node current = head;
+        Node next =null;
         if(index == 0){
-            Node b = n.next;
-            n.next = null;
-            head = b;
+            //store the next value of current element in 
+            //next variable and change the link to point to null
+            //point the head value to next
+             next = current.next;
+            current.next = null;
+            head = next;
         }
         else{
+            //stop just at the one element before the index
             for(int i=0;i<index-1;i++){
-                n=n.next;
+                current=current.next;
 
             }
-            Node b = n.next.next;
-            n.next = b;
+            //save the element in the next varibale for the furthur traversal.
+            next = current.next.next;
+            current.next = next;
         }
     }
     public void reverseList(){
